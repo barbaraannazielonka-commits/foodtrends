@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Food Trends Today</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fffaf3;--card:#fff;--ink:#2b2a28;--mut:#6b665e;--acc:#e4572e;--grn:#3a7d44;--line:#eadfce;--soft:#fdeee0;--ok:#d8f0dc;--bad:#fbdcd5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1a17;--card:#262320;--ink:#f3ede3;--mut:#b5ad9f;--acc:#ff7a50;--grn:#7bc486;--line:#3a352f;--soft:#332a22;--ok:#23402a;--bad:#4a2a22}}
+:root[data-theme="dark"]{--bg:#1c1a17;--card:#262320;--ink:#f3ede3;--mut:#b5ad9f;--acc:#ff7a50;--grn:#7bc486;--line:#3a352f;--soft:#332a22;--ok:#23402a;--bad:#4a2a22}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 .5em}
+header.hero{padding:56px 20px 44px;text-align:center;background:linear-gradient(135deg,#e4572e,#f2a541);color:#fff}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem)}.hero p{max-width:620px;margin:0 auto 1em;font-size:1.1rem}
+.badge{display:inline-block;background:rgba(255,255,255,.22);padding:4px 14px;border-radius:99px;font-size:.9rem;margin:4px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:6px;align-items:center;padding:8px 14px;overflow-x:auto}
+nav a{color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:99px;white-space:nowrap;font-size:.95rem}
+nav a:hover{background:var(--soft)}
+nav .sc{margin-left:auto;font-weight:700;color:var(--grn);white-space:nowrap}
+main{max-width:900px;margin:auto;padding:0 18px}
+section{padding:36px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.card .em{font-size:2rem}
+.vocab{width:100%;border-collapse:collapse}.vocab td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}.vocab td:first-child{font-weight:700;color:var(--acc);width:36%}
+.task-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{background:var(--soft);border-radius:99px;padding:2px 12px;font-size:.85rem;color:var(--mut)}
+.done .tag.pts{background:var(--grn);color:#fff}
+button{font:inherit;background:var(--acc);color:#fff;border:0;border-radius:10px;padding:9px 20px;cursor:pointer;font-weight:600}
+button:disabled{opacity:.5;cursor:default}
+select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px;max-width:100%}
+textarea{width:100%;min-height:130px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:6px 0}
+.row>span:first-child{flex:1 1 220px}
+.q{margin:14px 0}.q label{display:block;padding:4px 0;cursor:pointer}
+.ok{background:var(--ok);border-radius:8px;padding:2px 8px}.bad{background:var(--bad);border-radius:8px;padding:2px 8px}
+.res{font-weight:700;margin-top:10px;color:var(--grn)}
+.bank{background:var(--soft);padding:10px 14px;border-radius:10px;margin-bottom:10px}
+#final{display:none;text-align:center;background:linear-gradient(135deg,#3a7d44,#9bc53d);color:#fff;border-radius:20px;padding:34px 20px}
+#final .big{font-size:3.4rem;font-weight:800;font-family:Georgia,serif}
+.teams{background:var(--soft);border-left:5px solid var(--acc);padding:10px 14px;border-radius:8px;margin:10px 0}
+.gl{border-bottom:2px dotted var(--acc);cursor:help;background:var(--soft);border-radius:3px;padding:0 1px}
+#tip{position:fixed;display:none;z-index:20;max-width:240px;background:#2b2a28;color:#fff;padding:7px 11px;border-radius:8px;font-size:.88rem;line-height:1.4;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+footer{margin-top:40px;padding:26px 16px;text-align:center;background:var(--card);border-top:1px solid var(--line);color:var(--mut)}
+</style></head><body>
+<header class="hero"><h1>🍽️ Food Trends Today</h1>
+<p>What are people eating, and why? Read about 10 trends from a food industry report, learn new words and complete 8 tasks to collect points.</p>
+<span class="badge">Level B2</span><span class="badge">⏱ 90 minutes</span><span class="badge">🏆 Score at the end</span></header>
+<nav><a href="#learn">Learn</a><a href="#vocab">Vocabulary</a><a href="#tasks">Tasks</a><span class="sc" id="navsc">0 pts</span></nav>
+<main>
+<section id="learn"><h2>1. Read: ten food trends</h2>
+<p>Read the 10 texts carefully (about 15 minutes). All the tasks are based on them. <br>💡 <b>Mini dictionary:</b> words with a dotted underline may be difficult. Hover over them (or tap on a phone) to see the meaning. Source: food industry trends report, 2026 (FMI, Datassential, SPINS, NRA and others).</p>
+<div class="grid" id="trends"></div></section>
+
+<section id="vocab"><h2>2. Vocabulary list</h2>
+<div class="card"><table class="vocab" id="vtable"></table></div></section>
+
+<section id="tasks"><h2>3. Tasks</h2>
+<p>Complete all <b>8 tasks</b> and press <i>Check</i> in each one. Your total score appears when everything is done. Estimated time: 90 minutes in total.</p>
+<div id="tlist"></div>
+<div id="final"><div>Your final score</div><div class="big" id="fs"></div><p id="fm"></p><p id="fd"></p></div>
+</section></main>
+<footer>Nannestad High School - Barbara Anna Zielonka</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const TR=[["🍲","Next-Gen Comfort Foods","Comfort food is the top priority for 55% of consumers when they cook at home, followed by fast preparation. A quarter of all consumers, and 40% of Gen Z, say they cannot afford to experiment, so brands reinvent classics. Nine in 10 shoppers look for US regional flavours. Examples: KYUNU noodle soups and Taco Bell's Cheesy Dipping Burritos."],
+["⭐","Quality Counts","Six in 10 consumers want minimally processed products with no artificial ingredients. 46% stopped visiting a fast-food restaurant because quality went downhill. Take-and-bake products signal quality, and frozen cookies are the fastest-growing frozen food category."],
+["👵","Recipes for Healthy Aging","There are 124.4 million US adults aged 50+. Nearly eight in 10 believe certain foods help them age well. For people over 65, reducing sugar is the number one priority (57%), and they worry about mental sharpness and staying active, so brain and muscle products will grow. Example: OREO Zero Sugar cookies."],
+["🌏","New Global Ports of Entry","Chinese, Japanese and Korean food dominate, but Thai, Filipino and Vietnamese cuisines are growing fastest on US menus. Asian dishes appear on one-third of fast-food menus. Gochujang, yuzu, miso and black garlic are going mainstream, and interactive concepts like Korean BBQ and hot pot are expected to grow. Familiar “look-alike” forms, such as gyoza or snack-sized pierogi, help cautious customers try new things."],
+["🥨","Snacks as Meals","64% of consumers say they are increasingly likely to replace meals with snacks: 72% of millennials, 70% of Gen Z, 64% of Gen X and 51% of baby boomers. Afternoon is the busiest snacking time (43%). Protein is the key selling point: Chipotle's High Protein Cup has 32 g, and Subway's $3.99 Protein Pockets have over 20 g."],
+["🎉","Special Occasion Opportunities","Events such as the Super Bowl (137.7 million viewers in 2025) boost food sales; about half of fans buy soda and chips and 39% serve wings. Americans celebrate roughly six billion special occasions a year, and cake is the most common treat. 40% of consumers are likely to try a limited-time offer, especially a “twist on the familiar”. DIY snack kits and charcuterie boards are growing."],
+["🌶️","One-Step Seasoning","Consumers want convenience, so seasonings, spreads and sauces that make cooking easier are popular. Chili-lime, gochujang and ghost pepper are trending protein seasonings. Tillamook and KEWPIE made a limited-edition spread of butter, mayonnaise and spices for grilled cheese, and Lifeway sells a cultured kefir butter."],
+["💊","Prescription Nutrition","46% of consumers now choose food and drink for specific medical reasons, such as colds and flu, which is 10 points more than a few years ago. SPINS expects six breakout ingredients in 2026: saffron, acetyl L-carnitine, NMN, colostrum, shilajit and sea moss. Pumpkin, kale and sweet potatoes are the whole foods in demand."],
+["🥤","Snackable, Functional Beverages","Younger consumers drive drink trends. Ready-to-drink (RTD) coffee sales rose 5%, and Gen Z and millennials bought 47% of it. Young shoppers are sceptical of artificial sweeteners and sugar alcohols. Sodas now offer extras: Clear Protein Soda has 20 g of whey protein and no sugar, and Beyond Immerse uses pea protein and electrolytes."],
+["🍞","Baking in Convenience","Health is important, but people still love baked goods that are fresh and quick. Heat-and-eat products, such as rolls ready in 5–7 minutes or frozen churros made in an air fryer, are growing. Global flavours appear too: nearly two-thirds of consumers want to try Basque cheesecake, and 13% already have. Protein muffin mixes give 13 g per muffin."]];
+const GL={"reinvent":"to change something old so that it feels new","afford":"to have enough money to pay for something","regional":"from one particular area of a country","minimally processed":"changed as little as possible before you buy it","artificial":"not natural; made by people","take-and-bake":"sold ready to bake at home","went downhill":"became worse","mental sharpness":"the ability to think clearly and quickly","mainstream":"normal and accepted by most people","gochujang":"spicy red pepper paste from Korea","yuzu":"a sour Japanese citrus fruit","miso":"Japanese paste made from fermented soybeans","black garlic":"aged garlic that is dark, soft and sweet","interactive":"involving the customer actively, e.g. cooking at the table","hot pot":"a meal cooked in a pot of hot broth at the table","cautious":"careful; not wanting to take risks","gyoza":"Japanese dumplings","pierogi":"Polish dumplings","churros":"fried dough sticks, often with sugar","air fryer":"a kitchen machine that cooks food with hot air","baby boomers":"people born roughly 1946-1964","gen x":"people born roughly 1965-1980","millennials":"people born roughly 1981-1996","gen z":"people born roughly 1997-2012","super bowl":"the final of American football, a huge TV event","boost":"to increase or improve","limited-time offer":"a product that is sold only for a short time","twist on the familiar":"a small new change to something people already know","charcuterie":"a board with cold meats, cheese and other small foods","diy":"do it yourself","ghost pepper":"an extremely hot chili","cultured":"made with helpful bacteria (fermented)","kefir":"a fermented milk drink","breakout":"suddenly very successful","saffron":"an expensive yellow spice","colostrum":"the first milk a mother produces after birth","shilajit":"a sticky natural substance from mountain rocks, used in traditional medicine","sea moss":"an edible seaweed","nmn":"a supplement linked to healthy aging","acetyl l-carnitine":"a supplement that supports energy","whole foods":"natural foods that are not processed","ready-to-drink":"sold in a bottle or can, ready to drink at once","sceptical":"doubtful; not sure something is good or true","sweeteners":"substances that make food sweet, often instead of sugar","sugar alcohols":"low-calorie sweeteners such as xylitol","whey protein":"a protein made from milk","electrolytes":"minerals, e.g. salt, that help the body keep its water balance","basque cheesecake":"a creamy cheesecake from Spain with a burnt top","heat-and-eat":"needs only a few minutes of heating"};
+const gre=new RegExp("(?<![\\w-])("+Object.keys(GL).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\w-])","gi");
+const gloss=t=>t.replace(gre,m=>`<span class="gl" tabindex="0" data-d="${GL[m.toLowerCase()]}">${m}</span>`);
+const tip=document.createElement("div");tip.id="tip";document.body.appendChild(tip);
+function showTip(e){const el=e.target.closest&&e.target.closest(".gl");if(!el){tip.style.display="none";return}tip.textContent=el.dataset.d;tip.style.display="block";const r=el.getBoundingClientRect(),w=tip.offsetWidth,hh=tip.offsetHeight;tip.style.left=Math.max(8,Math.min(r.left+r.width/2-w/2,innerWidth-w-8))+"px";let t=r.top-hh-8;if(t<8)t=r.bottom+8;tip.style.top=t+"px"}
+["mouseover","focusin","click"].forEach(ev=>document.addEventListener(ev,showTip));
+document.addEventListener("mouseout",e=>{if(e.target.closest&&e.target.closest(".gl"))tip.style.display="none"});
+$("#trends").innerHTML=TR.map((t,i)=>`<div class="card"><div class="em">${t[0]}</div><h3>${i+1}. ${t[1]}</h3><p>${gloss(t[2])}</p></div>`).join("");
+const V=[["comfort food","familiar food that makes you feel good and relaxed"],["minimally processed","changed as little as possible before you buy it"],["convenience","something that saves time and effort"],["healthy aging","staying healthy and active as you get older"],["cognitive","connected with thinking, memory and learning"],["limited-time offer","a product sold only for a short period"],["ready-to-drink","sold in a bottle or can, ready to drink at once"],["sceptical","doubtful; not sure something is true or good"],["fusion","a mix of food styles from different cultures"],["heat-and-eat","needs only a few minutes of heating"],["seasoning","salt, spices or herbs added for flavour"],["supplement","a pill or powder that adds nutrients to your diet"],["daypart","a part of the day, e.g. morning or late night"],["authentic","real and traditional, not an imitation"],["longevity","a long life"],["demographic","a group of people of similar age or background"]];
+$("#vtable").innerHTML=V.map(v=>`<tr><td>${v[0]}</td><td>${v[1]}</td></tr>`).join("");
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+const T=[];let total=0;
+function mk(id,emoji,title,min,desc,body,check){T.push({id,check});
+$("#tlist").insertAdjacentHTML("beforeend",`<div class="card" id="t${id}"><div class="task-h"><h3>${emoji} Task ${id}: ${title}</h3><span><span class="tag">⏱ ${min} min</span> <span class="tag pts" id="p${id}">? pts</span></span></div><p>${desc}</p>${body}<button id="b${id}" onclick="run(${id})">Check</button><div class="res" id="r${id}"></div></div>`);}
+function run(id){const t=T.find(x=>x.id==id);const [s,m,note]=t.check();t.s=s;t.m=m;
+$("#b"+id).disabled=true;$("#r"+id).textContent=`You got ${s} / ${m} points. ${note||""}`;
+$("#p"+id).textContent=`${s}/${m} pts`;$("#t"+id).classList.add("done");
+total=T.reduce((a,x)=>a+(x.s||0),0);$("#navsc").textContent=total+" pts";
+if(T.every(x=>x.m!==undefined))fin();}
+function fin(){const max=T.reduce((a,x)=>a+x.m,0),p=Math.round(total/max*100);
+$("#final").style.display="block";$("#fs").textContent=`${total} / ${max}`;
+$("#fm").textContent=p>=85?"🌟 Excellent! You are a real food trend expert.":p>=65?"👍 Well done! You know a lot about food trends.":p>=45?"🙂 Good effort. Read the texts again and try to improve.":"📚 Keep practising. Study the vocabulary list and try again.";
+$("#fd").innerHTML=T.map(x=>`Task ${x.id}: ${x.s}/${x.m}`).join(" · ")+"<br>Remember: send your Task 5 text to Barbara on Teams!";
+$("#final").scrollIntoView({behavior:"smooth"});}
+const mark=(el,ok)=>el.classList.add(ok?"ok":"bad");
+
+const M=V.slice(0,8),defs=sh(M.map(v=>v[1]));
+mk(1,"🔗","Match the words",5,"Choose the correct definition for each word from the vocabulary list. (1 point each)",
+M.map((v,i)=>`<div class="row"><span><b>${v[0]}</b></span><select id="m${i}"><option value="">– choose –</option>${defs.map(d=>`<option>${d}</option>`).join("")}</select></div>`).join(""),
+()=>{let s=0;M.forEach((v,i)=>{const e=$("#m"+i),ok=e.value===v[1];if(ok)s++;mark(e,ok)});return[s,M.length]});
+
+const Q=[["What is the top priority in home meal preparation across generations?",["Low price","Comfort food","Organic ingredients"],1],
+["What do about six in 10 consumers say they want?",["Bigger portions","Minimally processed products with no artificial ingredients","More alcohol-free drinks"],1],
+["What is the number one priority for people aged 65+?",["Reducing sugar","Adding matcha","Eating more snacks"],0],
+["Which cuisines are growing fastest on US restaurant menus?",["Chinese, Japanese and Korean","Mexican and Italian","Thai, Filipino and Vietnamese"],2],
+["Which generation is most likely to replace meals with snacks?",["Baby boomers","Millennials","Gen X"],1],
+["Why do limited-time offers work well?",["They are always cheaper","40% of consumers are likely to try a new item if it is time-limited","They are only sold online"],1]];
+mk(2,"📖","Reading comprehension",10,"Choose the best answer, using the trend texts. (1 point each)",
+Q.map((q,i)=>`<div class="q"><b>${i+1}. ${q[0]}</b>${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}</div>`).join(""),
+()=>{let s=0;Q.forEach((q,i)=>{const c=document.querySelector(`input[name=q${i}]:checked`);if(c&&+c.value===q[2])s++;q[1].forEach((o,j)=>{const l=document.querySelectorAll(`input[name=q${i}]`)[j].parentElement;if(j===q[2])l.classList.add("ok");else if(c&&+c.value===j)l.classList.add("bad")})});return[s,Q.length]});
+
+const F=[["Comfort food is the top priority for home cooking across generations.",1],["Frozen cookies are the slowest-growing frozen food category.",0],["People over 65 are more interested in niche ingredients like matcha than younger adults.",0],["Asian dishes appear on one-third of fast-food menus in the US.",1],["Baby boomers are the generation most likely to replace meals with snacks.",0],["More consumers now choose food for specific medical reasons than a few years ago.",1]];
+mk(3,"✅","True or false?",5,"Decide if each statement is true or false according to the texts. (1 point each)",
+F.map((f,i)=>`<div class="row"><span>${f[0]}</span><select id="f${i}"><option value="">–</option><option value="1">True</option><option value="0">False</option></select></div>`).join(""),
+()=>{let s=0;F.forEach((f,i)=>{const e=$("#f"+i),ok=e.value!==""&&+e.value===f[1];if(ok)s++;mark(e,ok)});return[s,F.length]});
+
+const G=[["Comfort food is the top priority for ___ percent of consumers.",["55"]],["Frozen ___ are the fastest-growing frozen food category.",["cookies"]],["The number one priority for people aged 65+ is reducing ___.",["sugar"]],["Gochujang, miso and ___ are Asian ingredients moving into the mainstream.",["yuzu"]],["Subway's Protein Pockets contain more than 20 grams of ___.",["protein"]],["When people entertain at home, ___ is the food they serve most often.",["cake"]]];
+mk(4,"✏️","Complete the facts",5,"Write one word or number from the box in each gap. (1 point each)",
+`<div class="bank">55 · cookies · sugar · yuzu · protein · cake</div>`+G.map((g,i)=>`<div class="row"><span>${g[0].replace("___",`<input type="text" id="g${i}" size="10" autocomplete="off" autocapitalize="none">`)}</span></div>`).join(""),
+()=>{let s=0;G.forEach((g,i)=>{const e=$("#g"+i),ok=g[1].includes(e.value.trim().toLowerCase());if(ok)s++;mark(e,ok)});return[s,G.length,"The answers are in the box."]});
+
+mk(5,"📝","Write your opinion",10,"Which of the 10 trends will be most important for teenagers in Norway in the future? Write 60–90 words. Give reasons, use one fact from the article and at least three words from the vocabulary list.",
+`<div class="teams">📩 <b>Important:</b> when you are finished, copy your text and send it as a <b>private message to Barbara on Microsoft Teams</b>.</div>
+<textarea id="wr" placeholder="In my opinion, the most important trend is ..."></textarea><div class="row"><span class="tag" id="wc">0 words</span><button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText($('#wr').value).then(()=>this.textContent='Copied ✔')">Copy text</button></div>
+<div class="q"><label><input type="checkbox" class="ck"> I named one trend and gave my opinion with reasons.</label><label><input type="checkbox" class="ck"> I used a fact from the article.</label><label><input type="checkbox" class="ck"> I used three or more vocabulary words.</label></div>`,
+()=>{const w=$("#wr").value.trim().split(/\s+/).filter(Boolean).length;const c=[...document.querySelectorAll(".ck")].filter(x=>x.checked).length;return[(w>=60?4:w>=40?2:0)+c*2,10,`(${w} words, ${c}/3 checklist points.) Now send your text to Barbara on Teams!`]});
+$("#wr").addEventListener("input",e=>{$("#wc").textContent=e.target.value.trim().split(/\s+/).filter(Boolean).length+" words"});
+
+mk(6,"👩‍🍳","Develop a new product",10,"You work for a food company. Create a product that follows one of the trends. Fill in every field. (2 points each)",
+`<div class="row"><span>Product name</span><input type="text" id="n0"></div>
+<div class="row"><span>Trend it follows</span><select id="n1"><option value="">– choose –</option>${TR.map((t,i)=>`<option>${i+1}. ${t[1]}</option>`).join("")}</select></div>
+<div class="row"><span>Target group</span><select id="n2"><option value="">– choose –</option><option>Gen Z</option><option>Millennials</option><option>Gen X</option><option>Baby boomers / 65+</option></select></div>
+<div class="row"><span>Key ingredients</span><input type="text" id="n3" size="28"></div>
+<div class="row"><span>Which fact from the article supports your idea?</span><input type="text" id="n4" size="28"></div>`,
+()=>{let s=0;for(let i=0;i<5;i++){const e=$("#n"+i),ok=e.value.trim().length>=3;if(ok)s+=2;mark(e,ok)}return[s,10,"Present your product to a partner for one minute."]});
+
+const W=[["KYUNU chef-crafted noodle soup",0],["46% stopped visiting a fast-food restaurant because quality dropped",1],["OREO Zero Sugar cookies for older consumers",2],["Korean BBQ and hot pot concepts",3],["Chipotle High Protein Cup",4],["Charcuterie boards and Super Bowl wings",5],["Chili-lime and ghost pepper seasonings",6],["Saffron, NMN and sea moss",7],["Clear Protein Soda",8],["Frozen churros made in an air fryer",9]];
+mk(7,"🧩","Which trend is it?",5,"Match each example to the trend it belongs to. (1 point each)",
+W.map((w,i)=>`<div class="row"><span>${w[0]}</span><select id="w${i}"><option value="">–</option>${TR.map((t,j)=>`<option value="${j}">${j+1}. ${t[1]}</option>`).join("")}</select></div>`).join(""),
+()=>{let s=0;W.forEach((w,i)=>{const e=$("#w"+i),ok=e.value!==""&&+e.value===w[1];if(ok)s++;mark(e,ok)});return[s,W.length]});
+mk(8,"🎬","Watch and reflect",25,"First watch the video (open it in a new tab). Then write about <b>five trends</b> from the video that caught your attention and explain why each one interested you. Write about 75–120 words.",
+`<p><a href="https://www.youtube.com/watch?v=brYuW6JkTJo" target="_blank" rel="noopener" style="display:inline-block;background:var(--acc);color:#fff;padding:9px 20px;border-radius:10px;text-decoration:none;font-weight:600">▶ Watch the video on YouTube</a></p>
+<div class="teams">📩 <b>Important:</b> when you are finished, copy your text and send it as a <b>private message to Barbara on Microsoft Teams</b>.</div>
+<textarea id="vr" style="min-height:170px" placeholder="The first trend that caught my attention was ... because ..."></textarea><div class="row"><span class="tag" id="vc">0 words</span><button type="button" onclick="navigator.clipboard&&navigator.clipboard.writeText($('#vr').value).then(()=>this.textContent='Copied ✔')">Copy text</button></div>
+<div class="q"><label><input type="checkbox" class="vk"> I watched the whole video.</label><label><input type="checkbox" class="vk"> I wrote about five different trends.</label><label><input type="checkbox" class="vk"> I gave a reason for each trend.</label></div>`,
+()=>{const w=$("#vr").value.trim().split(/\s+/).filter(Boolean).length;const c=document.querySelectorAll(".vk:checked").length;return[(w>=75?4:w>=50?2:0)+c*2,10,`(${w} words, ${c}/3 checklist points.) Now send your text to Barbara on Teams!`]});
+$("#vr").addEventListener("input",e=>{$("#vc").textContent=e.target.value.trim().split(/\s+/).filter(Boolean).length+" words"});
+</script></body></html>
